@@ -18,6 +18,22 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        role: {
+            type: String,
+            enum: ['user', 'admin'],
+            default: 'user',
+        },
+        avatar: {
+            url: { type: String, default: '' },
+            alt: { type: String, default: 'user avatar' },
+        },
+        isActive: {
+            type: Boolean,
+            default: true,
+        },
+        refreshToken: {
+            type: String,
+        },
         // isVerified: {
         //     type: Boolean,
         //     default: false,
