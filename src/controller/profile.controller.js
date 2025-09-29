@@ -8,5 +8,7 @@ export const getInfoDetail = (req, res) => {
 }
 
 export const CreateProfile = (req, res) => {
+    console.log('User from token:', req.info); // req.user được gán trong middleware verifyToken
     res.send("tạo mới profile");
 }
+

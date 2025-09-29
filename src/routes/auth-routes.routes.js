@@ -1,5 +1,6 @@
 import express from 'express'
-import { loginController, signupController } from '../controller/auth.controller.js';
+import { getCurrentUser, loginController, refreshTokenController, signupController } from '../controller/auth.controller.js';
+import { verifyToken } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 // express.Router(): được dùng để tách cac route trong ứng dụng thành các module riêng biệt, 
@@ -9,6 +10,9 @@ router.post('/signup', signupController)
 
 router.post('/login', loginController)
 
+router.post('/refresh-token', refreshTokenController)
+
+router.get('/current-user', verifyToken, getCurrentUser)
 
 export default router;
 

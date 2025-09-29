@@ -1,22 +1,23 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { databaseConnection } from './src/config/database.js'
 import authRouter from './src/routes/auth-routes.routes.js'
 import profileRouter from './src/routes/profile.routes.js';
-
+import productRouter from './src/routes/product.routes.js';
 const app = express()
 
 dotenv.config();
 // Gọi connect database
 databaseConnection();
-
+app.use(cookieParser())
 app.use(express.json()) // middleware: hàm chạy giữa, xử lý dữ liệu gửi lên server
 app.use(bodyParser.urlencoded({ extended: true })); // xử lý dữ liệu từ form gửi lên
 
 app.use('/api/auth', authRouter) // Mục đính phục cho riêng authentication
 app.use('/api/profile', profileRouter) // Mục đính phục cho riêng profile
-
+app.use('/api/products', productRouter)
 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000')
